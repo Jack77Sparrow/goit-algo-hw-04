@@ -1,6 +1,6 @@
 from pathlib import Path
 
-def totaly_salary(path: Path):
+def total_salary(path: Path):
     '''
     Обчислює середню та загальну суму заробітної плати в викляді кортежу
 
@@ -38,7 +38,11 @@ def totaly_salary(path: Path):
             continue
     
     # обчислюємо середню заробітню плату
-    average_salary = int(total_salary/len(lines))
+    try:
+
+        average_salary = total_salary/len(lines)
+    except ZeroDivisionError:
+        print('не можна ділити на 0')
 
 
     return total_salary, average_salary
@@ -46,6 +50,6 @@ def totaly_salary(path: Path):
 
 
 path = Path(__file__).parent
-salary = totaly_salary(path / 'data/salary_ex1'
+salary = total_salary(path / 'data/salary_ex1'
 '.txt')
 print(salary)

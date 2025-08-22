@@ -1,4 +1,4 @@
-from colorama import Fore, Style
+from colorama import Fore
 
 def parse_input(user_input):
     """
@@ -34,11 +34,12 @@ def add_contact(person, user_info):
         name, phone = person
         # Додаємо у словник
         user_info[name] = phone
-        print(f'{Fore.GREEN}Contact added{Fore.RESET}')
+        return f'{Fore.GREEN}Contact added{Fore.RESET}'
+
     
     except ValueError as e:
         # Якщо аргументів недостатньо
-        print(f'{e}')
+        return f'{e}'
         
 
 def show_phone(contact, user_info):
@@ -54,13 +55,12 @@ def show_phone(contact, user_info):
     """
     # Якщо не передали аргумент (ім’я)
     if not contact:
-        print(f"{Fore.RED}Usage: phone <name>{Fore.RESET}")
-        return
+        return f"{Fore.RED}Usage: phone <name>{Fore.RESET}"
     name = contact[0]
     if name in user_info:
         return user_info[name]
     else:
-        print(f"{Fore.YELLOW}Contact not found{Fore.RESET}")
+        return f"{Fore.YELLOW}Contact not found{Fore.RESET}"
     
 
 def change_contact(contact, user_info):
@@ -79,11 +79,11 @@ def change_contact(contact, user_info):
         name, phone = contact
         if name in user_info:
             user_info[name] = phone
-            print('Contact updated')
+            return 'Contact updated'
         else:
-            print(f'{Fore.YELLOW}Name is not found{Fore.RESET}')
+            return f'{Fore.YELLOW}Name is not found{Fore.RESET}'
     except ValueError as e:
-        print(f'{e}')
+        return f'{e}'
 
 
 def show_all(user_info):
@@ -98,11 +98,11 @@ def show_all(user_info):
     """
     # Якщо контактів ще немає
     if not user_info:
-        print(f"{Fore.YELLOW}No contacts yet{Fore.RESET}")
+        return f"{Fore.YELLOW}No contacts yet{Fore.RESET}"
         return
     # Виводимо всі контакти
     for name, phone in user_info.items():
-        print(f"{Fore.BLUE}Name: {Fore.RESET}{name}\n{Fore.BLUE}Phone: {Fore.RESET}{phone}\n")
+        return f"{Fore.BLUE}Name: {Fore.RESET}{name}\n{Fore.BLUE}Phone: {Fore.RESET}{phone}\n"
 
 
 def main():
@@ -125,13 +125,13 @@ def main():
         elif command in ['hello', 'hi']:
             print('How can I help you')
         elif command == 'add':
-            add_contact(data, contacts)
+            print(add_contact(data, contacts))
         elif command == 'phone':
             print(show_phone(data, contacts))
         elif command == 'change':
-            change_contact(data, contacts)
+            print(change_contact(data, contacts))
         elif command == 'all':
-            show_all(contacts)
+            print(show_all(contacts))
         else:
             print('invalid command')
 
